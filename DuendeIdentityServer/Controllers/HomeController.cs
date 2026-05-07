@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DuendeIdentityServer.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DuendeIdentityServer.Controllers
 {
@@ -6,7 +7,8 @@ namespace DuendeIdentityServer.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var duendeConfig = new DuendeConfigViewModel();
+            return View(duendeConfig);
         }
     }
 }
