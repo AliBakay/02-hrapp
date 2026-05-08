@@ -1,4 +1,6 @@
+using HrApp.Services;
 using HrApp.ViewModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,13 +8,13 @@ namespace HrApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IIdentityService _service;
+        private readonly UserManager _userManager;
+        private SignInManager _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(IIdentityService service)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _service = service;
         }
 
         #region Login
