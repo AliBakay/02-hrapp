@@ -23,13 +23,17 @@ builder.Services
         .AddCookie("Cookies")
         .AddOpenIdConnect("oidc", options =>
         {
-            options.Authority = "https://localhost:5001"; // IdentityServer URL
+        options.Authority = "https://localhost:5001"; // Duende IdentityServer URL
             options.ClientId = "mvc_client";
             options.ClientSecret = "secret";
             options.ResponseType = "code";
-            options.SaveTokens = true;
+            // The external cookie is where ASP.NET Identity stores the
+            // incoming OIDC claims until ExternalLoginSignInAsync is called.
+            options.SignInScheme = IdentityConstants.ExternalScheme;
             options.Scope.Add("profile");
             options.Scope.Add("email");
+            options.GetClaimsFromUserInfoEndpoint = true;
+            options.SaveTokens = true;
         });
 
 var app = builder.Build();
